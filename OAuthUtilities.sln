@@ -14,6 +14,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebUtilities", "WebUtilitie
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StackOverflowApi.OAuth", "StackOverflowApi.OAuth\StackOverflowApi.OAuth.fsproj", "{B795D137-0789-4992-B45B-DE87FDFBEE8F}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StackOverflow.Test.Console", "StackOverflow.Test.Console\StackOverflow.Test.Console.fsproj", "{C546FD72-61C7-4849-967E-385036CE112A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{B795D137-0789-4992-B45B-DE87FDFBEE8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B795D137-0789-4992-B45B-DE87FDFBEE8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B795D137-0789-4992-B45B-DE87FDFBEE8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C546FD72-61C7-4849-967E-385036CE112A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C546FD72-61C7-4849-967E-385036CE112A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C546FD72-61C7-4849-967E-385036CE112A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C546FD72-61C7-4849-967E-385036CE112A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

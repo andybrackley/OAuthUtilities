@@ -17,7 +17,7 @@ module OAuth =
    let clientIdAsString = function ClientId(x) -> sprintf "%A" x
       
    type AuthCode = AuthCode of string
-   let authCodeAsString = function AuthCode(x) -> sprintf "%A" x
+   let authCodeAsString = function AuthCode(x) -> sprintf "%s" x
          
    type AccessToken = { Token : string; Expires : int }
 
