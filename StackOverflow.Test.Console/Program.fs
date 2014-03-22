@@ -4,8 +4,11 @@ module main =
    open System
    open System.Windows.Forms
 
+   open WebUtilities.WebRequest
    open WebUtilities.WebResponse
+
    open StackOverflowApi.OAuth
+   open StackOverflowApi.ApiRequests
 
    open BrowserWindow
    open OAuthClientAppSettings
@@ -21,6 +24,17 @@ module main =
 
    let simulateSomeRequest accessToken = 
       System.Diagnostics.Debug.WriteLine(accessToken)
+      async { 
+//         let! response = createHttpRequest2 { Url = "https://api.stackexchange.com/2.2/Notifications?" + "access_token=" + accessToken + "&key=" + OAuthParams.ClientKey; RequestType = GET } |> sendRequest Parsers.asString 
+//         let! response = createHttpRequest2 { Url = "https://api.stackexchange.com/2.2/me/Notifications?site=StackOverflow&" + "access_token=" + accessToken + "&key=" + OAuthParams.ClientKey; RequestType = GET } |> sendRequest Parsers.asString 
+//         let! response = createAuthenticatedApiRequest { ApiAccessToken = accessToken ; ClientKey = OAuthParams.ClientKey } (V2_2.Notifications.Notifications()) |> sendRequest Parsers.asString 
+         let! response = createAuthenticatedApiRequest { ApiAccessToken = accessToken ; ClientKey = OAuthParams.ClientKey } (V2_2.Notifications.NotificationsForMe("stackoverflow")) |> sendRequest Parsers.asString 
+
+         match response with
+            | Success(value) -> System.Diagnostics.Debug.WriteLine(value)
+            | _ -> System.Diagnostics.Debug.WriteLine("Error")
+         return()
+      } |> Async.Start
 
    let onUserHasBeenAuthenticated accessCode =
       async {

@@ -42,8 +42,8 @@ module OAuth =
    let buildRequestUrl oAuthParams =
       let scope = "read_inbox,private_info"
       OAuthUrl + "?" + "client_id=" + (oAuthParams.ClientId |> clientIdAsString) +
-                  "&" + "scope=" + scope + 
-                  "&" + "redirect_uri=" + oAuthParams.RedirectUrl
+                 "&" + "scope=" + scope + 
+                 "&" + "redirect_uri=" + oAuthParams.RedirectUrl
 
    let getAccessCodeFromUrl (redirectUrl : Uri) =
       match redirectUrl.PathAndQuery with
@@ -61,8 +61,3 @@ module OAuth =
          let! request = createHttpPostRequest { Url = AccessTokenUrl ; PostRequestType = POST(PostEncodingType, post_data) }
          return! sendRequest parseAccessToken request
    }
-
-//   module Notifications =
-//      let unreadUrl = "/2.2/notifications/unread"
-
-         

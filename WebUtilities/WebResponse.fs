@@ -4,6 +4,7 @@ module WebResponse =
    module Parsers =
       let asString str = str
 
+   open Ionic.Zlib
    open System.Net
    open System.IO
    open Parsers
@@ -17,8 +18,14 @@ module WebResponse =
       | WebException of WebException
       | ApiErrorResponse of HttpStatusCode * StatusDescription * ApiReasonDescription
 
+   let asStream (response : WebResponse) =
+      if response.Headers.["Content-Encoding"] = "gzip"
+      then GZipStream(response.GetResponseStream(), CompressionMode.Decompress) :> Stream
+      else response.GetResponseStream()
+      
+
    let parseWebResponse parser (response : WebResponse) =
-      use stream = response.GetResponseStream()
+      use stream = response |> asStream
       let reader = new StreamReader(stream)
       let html = reader.ReadToEnd()
       parser html      

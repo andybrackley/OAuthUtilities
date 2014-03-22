@@ -34,6 +34,10 @@ module WebRequest =
    let getResponse( request : WebRequest ) = request.AsyncGetResponse()
    let getRequestStream (str : string) = UnicodeEncoding.UTF8.GetBytes(str)
 
+   let addHeader (key : string, value : string) (request : WebRequest) =
+      request.Headers.[key] <- value
+      request
+
    let setContentType contentType (request : WebRequest) =
       request.ContentType <- contentType
       request
@@ -64,11 +68,7 @@ module WebRequest =
       match request.PostRequestType with 
       | POST(encoding, post_data) -> 
          System.Diagnostics.Debug.WriteLine(String.Format("With PostData: {0}", post_data ))
-
+         System.Diagnostics.Debug.WriteLine(String.Format("curl -d \"{0}\" {1}", post_data, request.Url))
          webRequest |> setMethodType "POST"
                     |> setContentType encoding.Value
                     |> setContent post_data
-
-
-
-
