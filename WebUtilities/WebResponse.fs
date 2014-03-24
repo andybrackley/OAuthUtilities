@@ -2,7 +2,10 @@
 
 module WebResponse =
    module Parsers =
+      open Newtonsoft.Json
+
       let asString str = str
+      let asJsonObject<'a> str = JsonConvert.DeserializeObject<'a>(str)         
 
    open Ionic.Zlib
    open System.Net

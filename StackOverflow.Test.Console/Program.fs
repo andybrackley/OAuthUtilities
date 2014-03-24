@@ -28,7 +28,10 @@ module main =
 //         let! response = createHttpRequest2 { Url = "https://api.stackexchange.com/2.2/Notifications?" + "access_token=" + accessToken + "&key=" + OAuthParams.ClientKey; RequestType = GET } |> sendRequest Parsers.asString 
 //         let! response = createHttpRequest2 { Url = "https://api.stackexchange.com/2.2/me/Notifications?site=StackOverflow&" + "access_token=" + accessToken + "&key=" + OAuthParams.ClientKey; RequestType = GET } |> sendRequest Parsers.asString 
 //         let! response = createAuthenticatedApiRequest { ApiAccessToken = accessToken ; ClientKey = OAuthParams.ClientKey } (V2_2.Notifications.Notifications()) |> sendRequest Parsers.asString 
-         let! response = createAuthenticatedApiRequest { ApiAccessToken = accessToken ; ClientKey = OAuthParams.ClientKey } (V2_2.Notifications.NotificationsForMe("stackoverflow")) |> sendRequest Parsers.asString 
+//         let! response = createAuthenticatedApiRequest { ApiAccessToken = accessToken ; ClientKey = OAuthParams.ClientKey } (V2_2.Notifications.NotificationsForMe("stackoverflow")) |> sendRequest Parsers.asString 
+
+         let rqst = V2_2.Inbox.Inbox(All)
+         let! response = V2_2.Inbox.sendRequest { ApiAccessToken = accessToken ; ClientKey = OAuthParams.ClientKey }  rqst
 
          match response with
             | Success(value) -> System.Diagnostics.Debug.WriteLine(value)
@@ -47,7 +50,6 @@ module main =
    [<EntryPoint>]
    [<STAThread>]
    let main argv = 
-
       let soAuthUrl = buildRequestUrl OAuthParams
 
       Application.EnableVisualStyles()
