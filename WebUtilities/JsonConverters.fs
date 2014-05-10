@@ -8,6 +8,16 @@ module JsonConverters =
    open Newtonsoft.Json
    open Newtonsoft.Json.Converters
 
+   type FromTwitterDate() = 
+      inherit JsonConverter()
+      
+      override x.CanConvert(t) = t.GetType() = typeof<string>
+      override x.WriteJson(writer, value, serializer) = raise(NotImplementedException())
+      override x.ReadJson(reader, objectType, existingValue, serializer) = 
+         let value = serializer.Deserialize(reader, typeof<string>) :?> string
+         DateTime.ParseExact(value, "ddd MMM dd HH:mm:ss zzz yyyy", System.Globalization.CultureInfo.InvariantCulture) :> obj
+
+
    /// My original version of the JsonConverter which I quite liked but am now
    /// thinking that specifying the additional type parameter is redundant
    type ToOptionConverter2<'a>() =
@@ -56,4 +66,7 @@ module JsonConverters =
        override x.WriteJson(writer, value, serializer) = ()
        override x.ReadJson(reader, t, existingValue, serializer) = System.DateTime.Now :> obj // For now I'm just going to return Now 
 
+   // TODO: Need a converter to convert between a generic type with option
+   //       i.e. [<field: JsonProperty("creation_date") CreationDate : DateTime option
+   //       Also, Need a string to color converter
 
